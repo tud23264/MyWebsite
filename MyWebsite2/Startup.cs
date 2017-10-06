@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using MyWebsite2.Models;
 
 namespace MyWebsite2
 {
@@ -22,6 +24,9 @@ namespace MyWebsite2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<MyWebsite2Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("MyWebsite2Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
